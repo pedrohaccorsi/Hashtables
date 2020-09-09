@@ -21,9 +21,11 @@ public class HashtableSeparateChaining<V> implements Hashtable<V> {
     @Override
     public Item<V> delete(int key) {
         int hashValue = hash(key);
+        int index = -1;
         for( Item<V> item : this.hashtable[hashValue]){
+            index++;
             if(item.getKey() == key){
-                return item;
+                return this.hashtable[hashValue].remove(index);
             }
         }
         return null;
@@ -38,11 +40,22 @@ public class HashtableSeparateChaining<V> implements Hashtable<V> {
 
     @Override
     public Item<V> search(int key) {
+        int hash = hash(key);
+        for(Item<V> item : this.hashtable[hash]){
+            if(item.getKey() == key )
+                return item;
+        }
         return null;
     }
 
     @Override
     public void print() {
-
+        String str = "";
+        for(int i=0; i<this.m; i++){
+            for(Item<V> item: this.hashtable[i]){
+                str += "Key: " + item.getKey() + ", Value: " + item.getValue() + "\n";
+            }
+        }
+        System.out.println( str.equals("") ? "Hashtable is empty" : str );
     }
 }

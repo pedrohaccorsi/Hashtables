@@ -86,6 +86,6 @@ public class HashtableOpenAddressing<V> implements Hashtable<V> {
                 str += "chave: " + item.getKey() + " - valor: " + item.getValue() + "\n";
             }
         }
-        System.out.println(str);
+        System.out.println( str.equals("") ? "Hashtable is empty" : str );
     }
 }
